@@ -1,0 +1,3 @@
+{% if widget.is_initial %}Actual: {{ widget.value.name }}
+{% if not widget.required %}<label><input type="checkbox" name="{{ widget.checkbox_name }}"> Eliminar archivo</label>{% endif %}<br>Cambiar:
+{% endif %}<input type="file" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>

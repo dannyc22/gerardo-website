@@ -1,0 +1,13 @@
+
+# Material de aprendizaje local
+/GUIA_GERARDO_WARP.md
+/aprendizaje/
+.venv/
+__pycache__/
+*.sqlite3
+backend/archivos/
+node_modules/
+.next/
+.env
+.env.local
+.DS_Store

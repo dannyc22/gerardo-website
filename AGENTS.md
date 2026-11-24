@@ -1,0 +1,1 @@
+Mantén la interfaz pública y el panel en español. Explica cómo iniciar y comprobar cada entrega. Conserva la partitura completa fuera del almacenamiento público y verifica la visibilidad de las muestras al retirar una publicación.
