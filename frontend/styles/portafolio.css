@@ -15,7 +15,7 @@ main.interior {min-height:65vh}
 .entrada {max-width:29rem;font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.45;color:#e0e1d8}
 .accion {display:inline-block;background:var(--tinta);color:white;padding:.8rem 1.5rem;text-decoration:none;font:600 1rem/1.5 system-ui,sans-serif}
 .hero .accion {background:#efdfc8;color:#25221e;margin-top:.6rem}
-.retrato {overflow:hidden;border-radius:48% 48% .15rem .15rem;aspect-ratio:1/1.08;background:#494e48;max-height:34rem}
+.retrato {overflow:hidden;aspect-ratio:1;background:#494e48}
 .retrato img,.perfil img {width:100%;height:100%;object-fit:cover}
 .bloque {margin:0 var(--margen);padding:clamp(2.8rem,6vw,5.5rem) 0;border-bottom:1px solid var(--linea)}
 .bloque h2,footer h2 {font-size:clamp(2.1rem,4vw,3.7rem);letter-spacing:-.05em;line-height:1.07;margin:0 0 1.4rem}
@@ -57,9 +57,80 @@ footer h2 {font-size:2rem}
 @media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
 @media(max-width:44rem) {
   .hero,.perfil,.obra {grid-template-columns:1fr}
-  .retrato {width:min(100%,23rem);aspect-ratio:1.18;justify-self:center}
+  .marco-piano {justify-self:center}
   header.barra {gap:.5rem}
   .barra nav a {font-size:.95rem}
   .perfil img {max-height:22rem}
   .experiencia dl>div {gap:.8rem}
+}
+
+/* Atril oscuro, bordes de latón y teclas de marfil. */
+.hero {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:radial-gradient(ellipse at 82% 48%,#4c392c 0%,transparent 55%),linear-gradient(120deg,#191717,#251d1b);
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:16% -10% 0;
+  pointer-events:none;
+  background:repeating-linear-gradient(to bottom,#dec29633 0 1px,transparent 1px 12px) center / 100% 49px no-repeat;
+  transform:rotate(-9deg);
+  mask-image:linear-gradient(90deg,transparent,#000 52%,#000);
+}
+.hero .rotulo {color:#e5c9a0;display:flex;align-items:center;gap:.8rem}
+.hero .rotulo::before {content:"";width:2.5rem;height:2px;background:currentColor}
+.marco-piano {
+  width:min(100%,30rem);
+  justify-self:center;
+  padding:clamp(.55rem,1.2vw,1rem);
+  background:#191717;
+  border:1px solid #a48b66;
+  box-shadow:.55rem .55rem 0 #aa876121,0 20px 48px #0004;
+}
+.retrato img {display:block;object-position:50% 42%}
+.teclado {
+  display:flex;
+  height:clamp(1.6rem,3.6vw,3rem);
+  margin-top:.65rem;
+  border-top:3px solid #723e39;
+  overflow:hidden;
+}
+.tecla {
+  position:relative;
+  flex:1;
+  background:linear-gradient(#cfc4ae,#fcf3dd 42%,#e5d5b8);
+  border-right:1px solid #302923;
+  border-bottom:3px solid #b2a38a;
+  border-radius:0 0 2px 2px;
+}
+.tecla i {
+  position:absolute;
+  z-index:1;
+  right:-32%;
+  top:0;
+  width:60%;
+  height:62%;
+  background:linear-gradient(90deg,#171616,#332f2a 65%,#131313);
+  border-bottom:3px solid #48423b;
+}
+.encabezado {border-bottom:3px double #a38a6c;padding-bottom:1rem}
+@media(prefers-reduced-motion:no-preference) {
+  @keyframes tocar {0%,100% {filter:none} 48% {filter:brightness(.75);transform:translateY(2px)}}
+  @keyframes abrir-pentagrama {from {clip-path:inset(0 100% 0 0)} to {clip-path:inset(0)}}
+  .hero::before {animation:abrir-pentagrama 1.5s ease-out both}
+  .tecla {animation:tocar .42s ease-in-out calc(.4s + var(--pulso)) 2}
+  .presentacion {animation:none}
+  .presentacion > * {animation:entrar .65s ease-out both}
+  .presentacion h1 {animation-delay:.1s}
+  .presentacion .entrada {animation-delay:.2s}
+  .presentacion .accion {animation-delay:.3s}
+  .barra nav a {background:linear-gradient(currentColor,currentColor) left bottom / 0 1px no-repeat;transition:background-size .22s}
+  .barra nav a:is(:hover,:focus-visible) {background-size:100% 1px}
+  @supports (animation-timeline:view()) {
+    .perfil img,.experiencia dl>div {animation:entrar linear both;animation-timeline:view();animation-range:entry 0% entry 90%}
+  }
 }

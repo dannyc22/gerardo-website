@@ -15,6 +15,17 @@ const trayectoria = [
   ["2024–2025", "Los Esmeralderos Salsa", "Piano · Salsa brava y son cubano"],
 ];
 
+// Cuatro octavas desde do. Cada grupo de teclas negras sigue el patrón 2 + 3.
+function Teclado() {
+  return <div className="teclado" aria-hidden="true">
+    {Array.from({ length: 28 }, (_, tecla) =>
+      <span key={tecla} className="tecla" style={{ "--pulso": (tecla % 7) * 120 + "ms" }}>
+        {[0, 1, 3, 4, 5].includes(tecla % 7) && <i />}
+      </span>
+    )}
+  </div>;
+}
+
 export default function Portada({ proyectos, fallo }) {
   return <>
     <Head><title>Gerardo Castañeda · Piano, composición y arreglos</title></Head>
@@ -25,7 +36,7 @@ export default function Portada({ proyectos, fallo }) {
         <p className="entrada">Del bambuco al jazz, una exploración de las músicas de Colombia desde el piano.</p>
         <a className="accion" href="#proyectos">Ver proyectos</a>
       </div>
-      <div className="retrato"><img src="/sources/about-me.jpeg" alt="Gerardo sentado al piano de cola" fetchPriority="high" /></div>
+      <div className="marco-piano"><div className="retrato"><img src="/sources/about-me.jpeg" alt="Gerardo sentado al piano de cola" fetchPriority="high" /></div><Teclado /></div>
     </section>
     <section id="proyectos" className="bloque">
       <div className="encabezado"><h2>Proyectos destacados</h2><Link href="/proyectos">Ver el portafolio</Link></div>
